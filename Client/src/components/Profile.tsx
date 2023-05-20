@@ -22,11 +22,10 @@ const Profile: React.FC = () => {
         <strong>Email:</strong> {currentUser.email}
       </p>
       <strong>Authorities:</strong>
-      <ul>
         {currentUser.role}
-      </ul>
+
     </div>
-  );
+  )
 };
 
 export default Profile;

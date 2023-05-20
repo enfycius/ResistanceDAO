@@ -3,8 +3,12 @@ const config = require("../config/auth.config.js");
 const db = require("../models");
 const User = db.user;
 
+const role = ["ROLE_USER", "ROLE_MODERATOR", "ROLE_ADMIN"];
+
 verifyToken = (req, res, next) => {
   let token = req.headers["x-access-token"];
+
+  // console.log(token);
 
   if (!token) {
     return res.status(403).send({
@@ -40,12 +44,17 @@ isAdmin = (req, res, next) => {
 
 isModerator = (req, res, next) => {
   User.findByPk(req.userId).then(user => {
+    
+    // console.log(user.role);
+    // console.log(user)
+
+
+    // console.log(role[user.role]);
   
-      if (user.role === "moderator") {
+      if (role[user.role] === "ROLE_MODERATOR") {
         next();
         return;
       }
-    
 
       res.status(403).send({
         message: "Require Moderator Role!"

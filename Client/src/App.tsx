@@ -14,7 +14,7 @@ import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
-
+import Board from "./components/Board";
 import EventBus from "./common/EventBus";
 
 const App: React.FC = () => {
@@ -27,8 +27,8 @@ const App: React.FC = () => {
 
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      setShowModeratorBoard(user.role == "ROLE_MODERATOR");
+      setShowAdminBoard(user.role == "ROLE_ADMIN");
     }
 
     EventBus.on("logout", logOut);
@@ -55,6 +55,11 @@ const App: React.FC = () => {
           <li className="nav-item">
             <Link to={"/home"} className="nav-link">
               Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/board"} className="nav-link">
+              Board
             </Link>
           </li>
 
@@ -123,6 +128,9 @@ const App: React.FC = () => {
           <Route path="/user" element={<BoardUser />} />
           <Route path="/mod" element={<BoardModerator />} />
           <Route path="/admin" element={<BoardAdmin />} />
+          <Route path="/board" element={<Board/>} />
+          {/* <Route path="/api/get" element={<Board/>} />
+          <Route path="/api/post" element={<Board/>} /> */}
         </Routes>
       </div>
     </div>

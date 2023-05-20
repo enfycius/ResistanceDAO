@@ -80,12 +80,13 @@ exports.signin = (req, res) => {
       });
 
       var authorities = [];
+      var role = ["ROLE_USER", "ROLE_MODERATOR", "ROLE_ADMIN"]
 
         res.status(200).send({
           id: user.id,
           username: user.username,
           email: user.email,
-          roles: user.role,
+          role: role[user.role],
           accessToken: token
         });
     })
