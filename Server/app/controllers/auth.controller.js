@@ -1,5 +1,6 @@
 const db = require("../models");
 const config = require("../config/auth.config");
+var sleep = require('system-sleep');
 const User = db.user;
 const Role = db.role;
 
@@ -13,27 +14,38 @@ exports.signup = (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
+    role: 1
   })
     .then(user => {
-      if (req.body.roles) {
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
-            res.send({ message: "User registered successfully!" });
-          });
-        });
-      } else {
+
+      res.send({ message: "User registered successfully!" });
+      // if (req.body.roles) {
+      //   Role.findAll({
+      //     where: {
+      //       name: {
+      //         [Op.or]: req.body.roles
+      //       }
+      //     }
+      //   }).then(roles => {
+      //     user.setRoles(roles).then(() => {
+      //       res.send({ message: "User registered successfully!" });
+      //     });
+      //   });
+      // } else {
         // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: "User registered successfully!" });
-        });
-      }
+        // console.log("test");
+
+        // console.log(user);
+
+       
+
+        // user.setRoles([1]).then(() => {
+        //   console.log(user);
+        //   console.log("Test");
+          
+        // });
+      // }
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -68,18 +80,14 @@ exports.signin = (req, res) => {
       });
 
       var authorities = [];
-      user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
-        }
+
         res.status(200).send({
           id: user.id,
           username: user.username,
           email: user.email,
-          roles: authorities,
+          roles: user.role,
           accessToken: token
         });
-      });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });

@@ -23,8 +23,7 @@ const Profile: React.FC = () => {
       </p>
       <strong>Authorities:</strong>
       <ul>
-        {currentUser.roles &&
-          currentUser.roles.map((role: string, index: number) => <li key={index}>{role}</li>)}
+        {currentUser.role}
       </ul>
     </div>
   );

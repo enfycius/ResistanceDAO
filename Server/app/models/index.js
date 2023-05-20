@@ -15,8 +15,8 @@ const sequelize = new Sequelize(
     pool: {
       max: Number(process.env.DB_MAX),
       min: Number(process.env.DB_MIN),
-      acquire: process.env.ACQUIRE,
-      idle: process.env.IDLE
+      acquire: process.env.DB_ACQUIRE,
+      idle: process.env.DB_IDLE
     }
   }
 );
@@ -34,6 +34,7 @@ db.role.belongsToMany(db.user, {
   foreignKey: "roleId",
   otherKey: "userId"
 });
+
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
