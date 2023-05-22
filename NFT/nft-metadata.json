@@ -1,0 +1,15 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Breed",
+      "value": "Maltipoo"
+    },
+    {
+      "trait_type": "Eye color",
+      "value": "Mocha"
+    }
+  ],
+  "description": "Resistance",
+  "image": "https://gateway.pinata.cloud/ipfs/QmQuHVDpasTp9d7pHT8sRk6eFry1ydqFS6VThVSU3QypGA?_gl=1*doxdak*rs_ga*MTQ5NTYyNDE3LjE2ODQ1ODQ5NzU.*rs_ga_5RMPXG14TE*MTY4NDYwMDQ1OC4zLjEuMTY4NDYwMTk3Ny4zMC4wLjA.",
+  "name": "Resistance DAO"
+}
